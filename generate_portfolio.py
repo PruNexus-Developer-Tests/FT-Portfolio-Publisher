@@ -23,7 +23,7 @@ def generate_portfolio(date):
     return portfolio
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 1 and sys.argv[1]:
         date = sys.argv[1]
     else:
         date = datetime.now().strftime("%Y-%m-%d")

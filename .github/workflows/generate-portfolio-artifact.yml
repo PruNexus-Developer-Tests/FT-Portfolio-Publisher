@@ -22,7 +22,7 @@ jobs:
         else
           DATE=${{ github.event.inputs.date }}
         fi
-        python generate_portfolio.py --date $DATE
+        python generate_portfolio.py $DATE
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
