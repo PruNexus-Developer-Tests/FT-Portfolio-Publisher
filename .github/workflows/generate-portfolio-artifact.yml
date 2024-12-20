@@ -1,0 +1,21 @@
+on:
+  workflow_dispatch: # Allows manual triggering of the action
+
+jobs:
+  generate-portfolio:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Generate portfolio artifact
+      run: |
+        mkdir -p artifacts
+        python generate_portfolio.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: portfolio-artifact-${{ github.run_id }}
+        path: artifacts/portfolio.json
