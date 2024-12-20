@@ -1,17 +1,15 @@
+import sys
 import json
 import random
 from datetime import datetime
 
-# Fund names
-fund_names = ["Fund A", "Fund B", "Fund C", "Fund D", "Fund E"]
-
-# Generate random portfolio data
-def generate_portfolio():
+def generate_portfolio(date):
     portfolio = {
-        "date": datetime.now().strftime("%Y-%m-%d"),
+        "date": date,
         "funds": []
     }
     
+    fund_names = ["Fund A", "Fund B", "Fund C", "Fund D"]  # Example fund names
     num_funds = random.randint(2, len(fund_names))
     selected_funds = random.sample(fund_names, num_funds)
     
@@ -24,10 +22,16 @@ def generate_portfolio():
     
     return portfolio
 
-# Write to JSON file
-output_file = "artifacts/portfolio.json"
-portfolio_data = generate_portfolio()
-with open(output_file, "w") as f:
-    json.dump(portfolio_data, f, indent=4)
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        date = sys.argv[1]
+    else:
+        date = datetime.now().strftime("%Y-%m-%d")
+    
+    portfolio_data = generate_portfolio(date)
+    
+    output_file = "artifacts/portfolio.json"
+    with open(output_file, "w") as f:
+        json.dump(portfolio_data, f, indent=4)
 
-print(f"Generated portfolio artifact: {output_file}")
+    print(f"Generated portfolio artifact: {output_file}")
